@@ -1,11 +1,9 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 from config.database import collection_name
 from models.software_tasks import SoftwareTasks
-
-from schemas.software_tasks_schema import (
-    software_estimate_serializer,
-    software_estimates_serializer,
-)
+from pymongo.errors import DuplicateKeyError
+from bson import ObjectId
+from typing import List, Dict
 
 
 ##Create an API router
@@ -13,7 +11,50 @@ work_log_router = APIRouter()
 
 
 # Retrieves instances of task/work logs
-@work_log_router.get("/")
+@work_log_router.get("/GetWorkLogs", response_model=List[SoftwareTasks])
 async def get_work_logs():
-    work_logs = software_estimate_serializer(collection_name.find())
-    return {"status": "ok", "data": work_logs}
+    work_logs_cursor = collection_name.find()
+    work_logs = list(work_logs_cursor)
+
+    for log in work_logs:
+        log["id"] = str(log["_id"])
+
+    return work_logs
+
+
+## Retrieves one instance of task/work logs
+@work_log_router.get("/GetWorkLogById/{id}", response_model=Dict)
+async def get_work_log(id: str):
+    work_log_cursor = collection_name.find({"id": ObjectId(id)})
+    work_log = dict(work_log_cursor)
+    # use bson ObjectId to format id input from client
+
+    return work_log
+
+
+# Create one new instance of work/task log from the client
+@work_log_router.post("/CreateWorkLog")
+async def create_log(task: SoftwareTasks):
+    try:
+        result = collection_name.insert_one(dict(task))
+
+        return {"id": str(result.inserted_id)}
+    except DuplicateKeyError:
+        raise HTTPException(status_code=400, detail="You cannot submit duplicate tasks")
+
+
+# Update a work log
+@work_log_router.put("/UpdateWorklog/{id}")
+async def update_work_log(id: str, log: SoftwareTasks):
+    collection_name.find_one_and_update({"_id": ObjectId(id)}, {"$set": dict(log)})
+
+    work_log = collection_name.find({"_id": ObjectId(id)})
+    return work_log
+
+
+# Delete one work log by ID
+@work_log_router.delete("/DeleteWorkLogById/{id}")
+async def delete_one_log(id: str, log: SoftwareTasks):
+    collection_name.find_one_and_delete({"_id": ObjectId(id)})
+
+    return {"status": "ok", "data": []}

@@ -1,9 +1,27 @@
 from pymongo import MongoClient
-import os
+from pymongo.server_api import ServerApi
+import certifi
 
-connection_string = os.environ[
-    "PYMONGO_CONNECTION_URL"
-]  # Gains access to this env variable
-mongo_client = MongoClient(connection_string)
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+connection_string = os.getenv("MONGO_URL")
+mongo_client = MongoClient(
+    connection_string,
+    server_api=ServerApi("1"),
+    tlsCAFile=certifi.where(),
+)
+
 
 database = mongo_client.software_estimation_bias
+
+collection_name = database["software_work_log"]
+
+# Send a ping to confirm a successful connection
+try:
+    mongo_client.admin.command("ping")
+    print("Pinged your deployment. You successfully connected to MongoDB on port 8000!")
+except Exception as e:
+    print(e)

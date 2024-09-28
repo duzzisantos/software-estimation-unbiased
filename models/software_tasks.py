@@ -27,6 +27,8 @@ class SoftwareTasks(BaseModel):
     form_setup_task: str
     table_setup_task: str
     layout_setup_task: str
+    data_display_task: str
+    data_visualization_task: str
     access_control_task: str
     seo_task: str
     widget_setup_task: str
