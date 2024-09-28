@@ -23,7 +23,7 @@ async def get_work_logs():
 
 
 ## Retrieves one instance of task/work logs
-@work_log_router.get("/GetWorkLogById/{id}", response_model=Dict)
+@work_log_router.get("/GetWorkLogById/{id}")
 async def get_work_log(id: str):
     work_log_cursor = collection_name.find({"id": ObjectId(id)})
     work_log = dict(work_log_cursor)

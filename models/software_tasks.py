@@ -1,37 +1,42 @@
 from pydantic import BaseModel
+from models.task_model import TaskModel
+from datetime import datetime
 
 
 class SoftwareTasks(BaseModel):
 
     ## Backend tasks
-    database_task: dict[str, str]
-    security_task: dict[str, str]
-    validation_task: dict[str, str]
-    dev_ops_task: dict[str, str]
-    server_management_task: dict[str, str]
-    api_setup_task: dict[str, str]
-    api_integration_task: dict[str, str]
-    data_backup_task: dict[str, str]
-    backend_testing_task: dict[str, str]
-    data_structure_task: dict[str, str]
-    machine_learning_task: dict[str, str]
-    scalability_task: dict[str, str]
-    optimization_task: dict[str, str]
-    cloud_task: dict[str, str]
+    database_task: list[TaskModel]
+    security_task: list[TaskModel]
+    validation_task: list[TaskModel]
+    dev_ops_task: list[TaskModel]
+    server_management_task: list[TaskModel]
+    api_setup_task: list[TaskModel]
+    api_integration_task: list[TaskModel]
+    data_backup_task: list[TaskModel]
+    backend_testing_task: list[TaskModel]
+    data_structure_task: list[TaskModel]
+    machine_learning_task: list[TaskModel]
+    scalability_task: list[TaskModel]
+    optimization_task: list[TaskModel]
+    cloud_task: list[TaskModel]
 
     ## Frontend tasks
-    styling_task: dict[str, str]
-    ui_ux_task: dict[str, str]
-    frontend_testing_task: dict[str, str]
-    api_logic_task: dict[str, str]
-    form_setup_task: dict[str, str]
-    table_setup_task: dict[str, str]
-    layout_setup_task: dict[str, str]
-    data_display_task: dict[str, str]
-    data_visualization_task: dict[str, str]
-    access_control_task: dict[str, str]
-    seo_task: dict[str, str]
-    widget_setup_task: dict[str, str]
-    ci_cd_task: dict[str, str]
-    deployment_task: dict[str, str]
-    cms_integration_task: dict[str, str]
+    styling_task: list[TaskModel]
+    ui_ux_task: list[TaskModel]
+    frontend_testing_task: list[TaskModel]
+    api_logic_task: list[TaskModel]
+    form_setup_task: list[TaskModel]
+    table_setup_task: list[TaskModel]
+    layout_setup_task: list[TaskModel]
+    data_display_task: list[TaskModel]
+    data_visualization_task: list[TaskModel]
+    access_control_task: list[TaskModel]
+    seo_task: list[TaskModel]
+    widget_setup_task: list[TaskModel]
+    ci_cd_task: list[TaskModel]
+    deployment_task: list[TaskModel]
+    cms_integration_task: list[TaskModel]
+
+    ## Time stamps
+    last_updated: datetime = datetime.now()

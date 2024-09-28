@@ -4,9 +4,9 @@ This is a backend application that helps to address one the classical problems i
 
 As task/work time logs are recorded, they are passed through Machine Learning models like TensorFlow - which is used to perform multilinear regression, and Scikit-Learn which is applied here to perform time-series forecasts using historical work/task time logs.
 
-These trained data are stored as batch data, to enable client view trained data from the past - with the view of detecting anomalies or deviations in the prediction as well as investigating the casues for such deviations (which might be outside of the application data's scope. Think - what if there was a layoff, or staff were stationed in other proejcts - thus prolonging the time required to deliver well known tasks?).
+These trained data are stored as batch data, to enable client view trained data from the past - with the view of detecting anomalies or deviations in the prediction as well as investigating the causes (which might be outside of the application data's scope. Think - what if there was a layoff, or staff were stationed to other projects - thus prolonging the time required to deliver well-known tasks?).
 
-Using scheduing features, data is retrained every fortnight - although the interval may differ across users. Some might train daily, and others weekly - it is up to the user to decide what their policy is.
+Using scheduling features, data is retrained every fortnight - although the interval may differ across users. Some might train daily, and others weekly - it is up to the user to decide what their policy is.
 
 ## Tools used
 
@@ -15,6 +15,7 @@ Using scheduing features, data is retrained every fortnight - although the inter
 - MongoDB
 - TensorFlow
 - Scikit-Learn
+- Celery
 
 ## Objectives
 
