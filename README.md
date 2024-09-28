@@ -22,5 +22,61 @@ Using scheduing features, data is retrained every fortnight - although the inter
 - To compare previous academic research outcomes on this topic -
   with results from generated from this system.
 - To have a system that guides developers and project managers toward making more-informed, objective decisions with regards to estimating effort and time expended in building software.
+- To help
 
 ## Process flow
+
++-----------------+
+| User |
++-----------------+
+|
+v
++-----------------------+
+| Submit Work Log |
++-----------------------+
+|
+v
++-----------------------+
+| Process Data Model |
++-----------------------+
+|
+v
++-----------------------+
+| Interact with API |
++-----------------------+
+|
+v
++-----------------------+
+| Store in Database |
++-----------------------+
+|
+v
++--------------------------------------+
+| +-----------------------+ |
+| | Train Data (Multi | |
+| | Linear Regression) | |
+| +-----------------------+ |
+| | |
+| v |
+| +-----------------------+ |
+| | Store Training Results| |
+| +-----------------------+ |
+| ^ |
+| | |
+| +-----------------------+ |
+| | Train Data (Time | |
+| | Series Analysis) | |
+| +-----------------------+ |
+| |
++--------------------------------------+
+|
+v
++-----------------------+
+| Query Results |
++-----------------------+
+|
+v
++-----------------------+
+| Display Results |
+| (Charts/Frontend) |
++-----------------------+
