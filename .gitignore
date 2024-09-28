@@ -1,0 +1,12 @@
+#env
+.env
+.venv
+
+#history
+.history
+
+#cache
+/__pycache__
+
+#path
+/path
