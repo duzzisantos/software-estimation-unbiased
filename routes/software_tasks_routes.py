@@ -2,8 +2,8 @@ from fastapi import APIRouter, HTTPException
 from config.database import collection_name
 from models.software_tasks import SoftwareTasks
 from pymongo.errors import DuplicateKeyError
-from bson import ObjectId
-from typing import List, Dict
+from bson import ObjectId, raw_bson
+from typing import List
 
 
 ##Create an API router
@@ -35,8 +35,10 @@ async def get_work_log(id: str):
 # Create one new instance of work/task log from the client
 @work_log_router.post("/CreateWorkLog")
 async def create_log(task: SoftwareTasks):
+
     try:
         result = collection_name.insert_one(dict(task))
+        print(result)
 
         return {"id": str(result.inserted_id)}
     except DuplicateKeyError:

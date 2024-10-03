@@ -26,6 +26,6 @@ training_result = database["training_result"]
 # Send a ping to confirm a successful connection
 try:
     mongo_client.admin.command("ping")
-    print("Pinged your deployment. You successfully connected to MongoDB on port 8000!")
+    print("Pinged your deployment. You successfully connected to MongoDB!")
 except Exception as e:
     print(e)
