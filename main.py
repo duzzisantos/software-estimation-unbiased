@@ -2,11 +2,17 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from routes.software_tasks_routes import work_log_router
 from routes.training_records import training_output_router
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 app = FastAPI()
 
+website_url = os.getenv("WEBSITE_URL")
 origins = [
     "http://localhost:5173",
+    website_url,
     ##and other origins: eg production, staging etc
 ]
 
