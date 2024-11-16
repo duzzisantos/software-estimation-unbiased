@@ -1,7 +1,9 @@
-from fastapi import FastAPI
+from fastapi import Depends, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from routes.software_tasks_routes import work_log_router
 from routes.training_records import training_output_router
+from fastapi_limiter import FastAPILimiter
+from fastapi_limiter.depends import RateLimiter
 from dotenv import load_dotenv
 import os
 
@@ -27,3 +29,13 @@ app.add_middleware(
 
 app.include_router(work_log_router)
 app.include_router(training_output_router)
+
+
+@app.get("/", dependencies=[Depends(RateLimiter(times=5, seconds=10))])
+async def index():
+    return {"message": "Too many requests"}
+
+
+@app.post("/", dependencies=[Depends(RateLimiter(times=5, seconds=10))])
+async def index():
+    return {"message": "Too many requests"}
