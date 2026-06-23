@@ -25,7 +25,9 @@ async def get_work_logs():
 ## Retrieves one instance of task/work logs
 @work_log_router.get("/GetWorkLogById/{id}")
 async def get_work_log(id: str):
-    work_log_cursor = collection_name.find({"id": ObjectId(id)})
+    work_log_cursor = collection_name.find_one({"_id": ObjectId(id)})
+    if not work_log_cursor:
+        raise HTTPException(status_code=404, detail="Work log not found")
     work_log = dict(work_log_cursor)
     # use bson ObjectId to format id input from client
 

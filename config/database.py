@@ -23,6 +23,9 @@ database = mongo_client.software_estimation_bias
 collection_name = database["software_work_log"]
 training_result = database["training_result"]
 
+training_db = mongo_client.training_result
+regression_collection = training_db["multiple-regression"]
+
 # Send a ping to confirm a successful connection
 try:
     mongo_client.admin.command("ping")

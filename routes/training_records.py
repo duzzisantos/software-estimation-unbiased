@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException
-from config.database import training_result
-from models.time_series_result import TimeSeriesResult
+from config.database import training_result, regression_collection
+from models.time_series_result import TimeSeriesResult, RegressionResult
 from pymongo.errors import DuplicateKeyError
 from bson import ObjectId
 from typing import List
@@ -33,6 +33,20 @@ async def get_narrow_trained_logs(joinedCategories: str):
 
     for each in joinedCategories.split("+"):
         output_cursor = training_result.find({"category": each})
-        queryResult.append(output_cursor)
+        results = list(output_cursor)
+        for item in results:
+            item["id"] = str(item["_id"])
+        queryResult.extend(results)
 
     return queryResult
+
+
+@training_output_router.get(
+    "/GetRegressionResults", response_model=List[RegressionResult]
+)
+async def get_regression_results():
+    cursor = regression_collection.find()
+    output = list(cursor)
+    for item in output:
+        item["id"] = str(item["_id"])
+    return output
