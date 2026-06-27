@@ -16,6 +16,18 @@
 
 This service handles the collection, storage, retrieval, and management of work log data. Teams submit time logs for 29 standardized task categories, which are then consumed by the [Training Service](https://github.com/duzzisantos/python-data-training) for PERT analysis, LSTM forecasting, and regression modeling.
 
+## Why It Matters
+
+Accurate work log data is the foundation for evaluating software project estimation bias — without it, teams risk compounding the very problems they aim to solve:
+
+- **Risky conclusions** — Incomplete or inconsistent data produces misleading model outputs. *Example: Missing logs for DevOps tasks cause the regression model to underweight infrastructure effort, leading managers to understaff deployments.*
+
+- **Under or over-investment of resources** — Poor data quality distorts resource planning. *Example: A team logs frontend tasks inconsistently, inflating styling estimates by 40% and diverting budget from underfunded backend work.*
+
+- **Missing deadlines** — Gaps in historical data weaken forecast accuracy. *Example: Without API integration logs from prior sprints, the LSTM model fails to flag a recurring 2-week bottleneck, and the team misses a release window.*
+
+- **Encouraging realistic, resource-efficient estimations** — Structured, standardized data collection enables evidence-based planning. *Example: After enforcing consistent logging across all 29 task categories, a team's PERT forecasts improve from within 35% accuracy to within 12%.*
+
 ---
 
 ## Architecture
